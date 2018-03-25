@@ -1,0 +1,9 @@
+2018-03-23 11:13:09 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Table "PROJECT" not found; SQL statement:
+SELECT* FROM Project [42102-196]
+2018-03-23 11:14:48 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Table "PROJECT" not found; SQL statement:
+SELECT* FROM project [42102-196]
+2018-03-23 11:14:54 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Table "PROJECT" not found; SQL statement:
+SELECT* FROM project [42102-196]
