@@ -19,7 +19,7 @@ class ProjectImplService {
 
         try {
             if (project.state) {
-                saveTimeSpent(project, id)
+                saveTimeSpent(project, id) // save the time spent from the freelancer start working until he stopped
                 project.state = false
                 project.save()
             } else {
@@ -33,6 +33,7 @@ class ProjectImplService {
     }
 
     def saveTimeSpent(Project p, long id) {
+
         use(groovy.time.TimeCategory) {
             def duration = (new java.util.Date() - p.lastUpdated).toMilliseconds()
             log.info("Duration Spent on the project  ": "${duration}")
@@ -43,7 +44,7 @@ class ProjectImplService {
     }
 
     def showTimeSpent(long id) {
-
+        // Display all the times the freelancer had worked  on the projects
         def list = TimeSpent.executeQuery("select timeSpent,dateCreated  from TimeSpent p " +
                 "where p.projectId = ?", [Project.get(id)])
         List timeSpent = []
@@ -66,6 +67,7 @@ class ProjectImplService {
 
 
     def convert(int millis) {
+        // convert time saved in milliseconds to hours+minutes+seconds : 00:00:00
         long hours = TimeUnit.MILLISECONDS.toHours(millis)
         long minutes = TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1)
         long seconds = TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)
