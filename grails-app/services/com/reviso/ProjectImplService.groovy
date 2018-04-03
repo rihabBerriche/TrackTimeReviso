@@ -48,21 +48,30 @@ class ProjectImplService {
         def list = TimeSpent.executeQuery("select timeSpent,dateCreated  from TimeSpent p " +
                 "where p.projectId = ?", [Project.get(id)])
         List timeSpent = []
-        list.each { row ->
-            int total = (Integer) row[0]
-            timeSpent << new searchResult([timeSpent: convert(total), dateCreated: row[1]])
-        }
 
-        return new Result([success: true, data: timeSpent])
+          if(list.size()!=null){
+              list.each { row ->
+                  int total = (Integer) row[0]
+                  timeSpent << new searchResult([timeSpent: convert(total), dateCreated: row[1]])
+              }
+              return new Result([success: true, data: timeSpent])
+
+
+          }else {
+              return new Result([success: true, data: timeSpent])
+          }
 
     }
 
     def displayTotalTimeSpent(long id) {
 
         def totalSeconds = TimeSpent.executeQuery("select sum(time.timeSpent) FROM TimeSpent time Where time.projectId = ? ",[Project.get(id)])
-        def total = (Integer) totalSeconds[0]
-        def totalTimeSpent = convert(total)
-        return totalTimeSpent
+            def total = (Integer) totalSeconds[0]
+            if (total==null) {
+                return 0
+            }
+            def totalTimeSpent = convert(total)
+            return totalTimeSpent
     }
 
 

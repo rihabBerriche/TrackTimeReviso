@@ -13,7 +13,7 @@ class ProjectControllerSpec extends Specification implements ControllerUnitTest<
             1 * count() >> 0
         }
 
-        when: "The index action is executed"
+        when: "The updateStatus action is executed"
         controller.index()
 
         then: "The model is correct"

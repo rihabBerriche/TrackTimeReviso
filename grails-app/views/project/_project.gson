@@ -1,0 +1,7 @@
+import com.reviso.Project
+
+model {
+	Project project
+}
+
+json g.render(project, [resolveTemplate: false])

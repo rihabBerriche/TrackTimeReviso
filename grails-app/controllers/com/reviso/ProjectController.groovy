@@ -7,11 +7,11 @@ class ProjectController {
 
     ProjectService projectService
     ProjectImplService projectImplService
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", show: "GET"]
 
 
     def index() {
-
+         log.info("i am here")
         respond projectService.list(params), model: [projectCount: projectService.count(), projects: projectService.list(params), totalTimeSpent: flash.totalTime]
     }
 
@@ -38,7 +38,18 @@ class ProjectController {
             render(view: 'index', model: [errorMessage: result.data])
         }
     }
+    def updateStatus(Long id) {
 
+        def result = projectImplService.updateState(id)
+        flash.totalTime = projectImplService.displayTotalTimeSpent(id)
+        respond projectService.list(params), model: [projectCount: projectService.count(), projects: projectService.list(params), totalTimeSpent: flash.totalTime]
+
+        /*if (result.success) {
+            redirect(action: "updateStatus")
+        } else {
+            render(view: 'updateStatus', model: [errorMessage: result.data])
+        }*/
+    }
 
     def create() {
         respond new Project(params)

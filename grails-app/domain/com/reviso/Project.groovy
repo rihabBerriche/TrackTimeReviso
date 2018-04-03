@@ -1,5 +1,7 @@
 package com.reviso
 
+import grails.rest.Resource
+
 class Project {
     String name
     //State state = State.PAUSED

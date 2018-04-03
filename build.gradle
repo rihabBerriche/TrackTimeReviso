@@ -26,6 +26,9 @@ repositories {
 }
 
 dependencies {
+
+    compile "org.grails.plugins:views-json"
+    compile "org.grails.plugins:views-json-templates"
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
@@ -58,6 +61,9 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+    runtime 'mysql:mysql-connector-java:5.1.29'
+    compile 'org.grails.plugins:database-migration:3.0.3'
+    compile 'org.liquibase:liquibase-core:3.5.3'
 }
 
 bootRun {
